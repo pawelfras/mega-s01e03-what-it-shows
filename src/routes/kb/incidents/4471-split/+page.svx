@@ -2,7 +2,7 @@
 layout: runbook
 title: '#4471 · three problems, not one'
 owner: Paweł Fraś
-status: draft
+status: open
 reviewed: 2026-10-28
 signature: Paweł Fraś
 ---
@@ -12,31 +12,43 @@ signature: Paweł Fraś
   import Callout from '#lib/kb/Callout.svelte';
   import RenderStamp from '#lib/kb/RenderStamp.svelte';
   const repo = 'https://github.com/pawelfras/mega-s01e03-what-it-shows/issues';
+  const tickets = {
+    parser: { href: `${repo}/1`, state: 'closed · fixed' },
+    hint: { href: `${repo}/2`, state: "closed · won't fix" },
+    'one-day': { href: `${repo}/3`, state: 'open · no fix' },
+  };
 </script>
 
 [#4471](/kb/incidents/4471) was merged on subject lines ([decision 0001](/kb/decisions/0001-dedupe-by-subject))
 and marked known as one bug. Read by tenant and by what the reports say, it holds three problems.
-Each now has its own ticket. The counts below are computed from the export on every build.
+Each has its own ticket. The counts below are computed from the export on every build, the way
+[the #4471 table](/kb/incidents/4471) counts them.
 
-<SplitTable ticket={4471} tickets={{ parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` }} />
+<SplitTable ticket={4471} {tickets} />
+
+<Callout kind="warn">
+Engineering closed #4471 on 5 October: <code>parser</code> fixed (fix(dates): parse dd/mm for eu
+locales), <code>hint</code> won't fix (booking-v3 form retired). Neither touches <code>one-day</code>.
+Closing #4471 does not close it: its ticket stays open.
+</Callout>
 
 ## The three problems
 
-**`parser` — the shared parser reads every date month first.** Day-first tenants get day and month
-swapped: "7 April" goes out as "4 July". This is what #4471's title describes, and its queued fix
-covers only this.
+**`parser` — the shared parser read every date month first.** Day-first tenants got day and month
+swapped: "7 April" went out as "4 July". This is what #4471's title describes. Fixed.
 
-**`hint` — booking-v3 prints `MM/DD/YYYY` under its date field.** At day-first tenants on
-booking-v3, people type what the hint says, month first, and the form reads it day first. It
-looks like the parser bug in the report, but the parser fix will not touch it: the form's hint and
-its reading must agree.
+**`hint` — booking-v3 printed `MM/DD/YYYY` under its date field.** At day-first tenants on
+booking-v3, people typed what the hint said, month first, and the form read it day first. It
+looked like the parser bug in the reports, but the parser fix does not touch it. Won't fix: the
+form is retired.
 
 **`one-day` — the date moves by one day, not a month flip.** Tuesday shows as Monday, an invite
 arrives before the booking, two clients in different time zones get different days for the same
 meeting. That is a time-zone or day-boundary bug. The desk noted these reports
-(`desk-notes.json`) but [the #4471 table](/kb/incidents/4471) counts them under `parser`.
+(`desk-notes.json`) and counts them where they are filed, under `parser`. The parser fix does not
+reach them. Still open.
 
-<Callout kind="warn">
+<Callout>
 Do not count by intake tag. Intake guesses the cause from the reporter's browser; many reports
 come from browsers set to <code>en-US</code> at day-first tenants. The cause follows the tenant's
 locale, its booking form and the channel (<code>causes.ts</code>), and the "intake tag differs"
@@ -46,14 +58,15 @@ column shows how often the guess is wrong.
 ## How this was counted
 
 1. Drop repeated rows: the export pages overlap, so one id counts once (`uniqueById`).
-2. Take the desk's one-day list first; those reports are `one-day`.
-3. Place every other report with `causeOf`: day-first tenant, `form` channel, booking-v3 → `hint`; any
-   other day-first report → `parser`.
+2. Place every report with `causeOf` (`groupByCause`): day-first tenant, `form` channel, booking-v3 →
+   `hint`; any other day-first report → `parser`.
+3. List the desk's one-day reports again as their own problem; they stay counted under `parser`, as
+   the desk files them.
 
 ## What to change on the desk
 
 - Split by cause, not subject. Same subject, different cause: keep apart. The
   [dedupe explorer](/kb/triage/dedupe) already shows the difference.
-- When a big ticket is marked known, check that its fix covers every report in it.
+- When a big ticket is closed, check that its fixes cover every problem in it.
 
 <RenderStamp {signature} />
