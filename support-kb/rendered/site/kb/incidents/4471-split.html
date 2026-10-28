@@ -7,18 +7,18 @@
 		<link href="../../_app/immutable/assets/runbook.9BJ9BomY.css" rel="stylesheet">
 		<link href="../../_app/immutable/assets/Callout.89E4ZsOX.css" rel="stylesheet">
 		<link href="../../_app/immutable/assets/5.BfhrD2fo.css" rel="stylesheet">
-		<link rel="modulepreload" href="../../_app/immutable/entry/start.BbYMxOHn.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/Duppggq9.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/start.1mmYOcTv.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/CXRPGsw_.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/WLr3OCk2.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/CaskBBMd.js">
-		<link rel="modulepreload" href="../../_app/immutable/entry/app.BYYI-Yu4.js">
+		<link rel="modulepreload" href="../../_app/immutable/entry/app.D9sI6Uj7.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/CxLjh0hF.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/BxHaDExg.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/BviaqjHR.js">
 		<link rel="modulepreload" href="../../_app/immutable/nodes/0.l8Bwb4lC.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/BAC74Pmu.js">
-		<link rel="modulepreload" href="../../_app/immutable/nodes/5.ctK4Ydxq.js">
-		<link rel="modulepreload" href="../../_app/immutable/chunks/lIjIeTeN.js">
+		<link rel="modulepreload" href="../../_app/immutable/nodes/5.BmSfHloG.js">
+		<link rel="modulepreload" href="../../_app/immutable/chunks/D4Ey7ITS.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/CSay-iu-.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/BWUPc4Cf.js">
 		<link rel="modulepreload" href="../../_app/immutable/chunks/wzv8qNZl.js">
@@ -43,19 +43,19 @@ reach them. Still open.</p> <aside class="note svelte-hdh0t2"><!---->Do not coun
 come from browsers set to <code>en-US</code> at day-first tenants. The cause follows the tenant's
 locale, its booking form and the channel (<code>causes.ts</code>), and the "intake tag differs"
 column shows how often the guess is wrong.<!----></aside><!----> <h2>How this was counted</h2> <ol><li>Drop repeated rows: the export pages overlap, so one id counts once (<code>uniqueById</code>).</li> <li>Place every report with <code>causeOf</code> (<code>groupByCause</code>): day-first tenant, <code>form</code> channel, booking-v3 → <code>hint</code>; any other day-first report → <code>parser</code>.</li> <li>List the desk’s one-day reports again as their own problem; they stay counted under <code>parser</code>, as
-the desk files them.</li></ol> <h2>What to change on the desk</h2> <ul><li>Split by cause, not subject. Same subject, different cause: keep apart. The <a href="/kb/triage/dedupe">dedupe explorer</a> already shows the difference.</li> <li>When a big ticket is closed, check that its fixes cover every problem in it.</li></ul> <!--[--><p class="stamp svelte-5qojh0">desk ref <b class="svelte-5qojh0">DR-9JJC-JN0G</b></p><!--]--><!----><!----></main> <footer class="svelte-60g32v">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!----><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+the desk files them.</li></ol> <h2>What to change on the desk</h2> <ul><li>Split by cause, not subject. Same subject, different cause: keep apart. The <a href="/kb/triage/dedupe">dedupe explorer</a> already shows the difference.</li> <li>When a big ticket is closed, check that its fixes cover every problem in it.</li></ul> <!--[--><p class="stamp svelte-5qojh0">desk ref <b class="svelte-5qojh0">DR-AJJM-G3HJ</b></p><!--]--><!----><!----></main> <footer class="svelte-60g32v">Pages are written by people. Tables and charts are built from data at render time.</footer></div><!----><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
 			
 			<script>
 				{
-					__sveltekit_wq9r5e = {
+					__sveltekit_15kddbt = {
 						base: new URL("../..", location).pathname.slice(0, -1)
 					};
 
 					const element = document.currentScript.parentElement;
 
 					Promise.all([
-						import("../../_app/immutable/entry/start.BbYMxOHn.js"),
-						import("../../_app/immutable/entry/app.BYYI-Yu4.js")
+						import("../../_app/immutable/entry/start.1mmYOcTv.js"),
+						import("../../_app/immutable/entry/app.D9sI6Uj7.js")
 					]).then(([kit, app]) => {
 						kit.start(app, element, {
 							node_ids: [0, 5],

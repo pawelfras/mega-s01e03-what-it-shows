@@ -13,7 +13,7 @@ Counts as the desk's own view counts them; the 5 one-day reports are also counte
 
 ## The page
 
-Signed `Paweł Fraś`, desk ref **DR-9JJC-JN0G**.
+Signed with the course ticket (`signature:` in its frontmatter), desk ref **DR-AJJM-G3HJ**.
 
 - the .svx: [`support-kb/src/routes/kb/incidents/4471-split/+page.svx`](support-kb/src/routes/kb/incidents/4471-split/+page.svx)
 - the page as the desk will see it: [`support-kb/rendered/4471-split.html`](support-kb/rendered/4471-split.html)

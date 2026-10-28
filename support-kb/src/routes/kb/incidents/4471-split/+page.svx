@@ -4,7 +4,7 @@ title: '#4471 · three problems, not one'
 owner: Paweł Fraś
 status: open
 reviewed: 2026-10-28
-signature: Paweł Fraś
+signature: 'v1.eyJzdWIiOiIxMjg3IiwiYXVkIjoiY2hhbGxlbmdlOndoYXQtaXQtc2hvd3MiLCJpYXQiOjE3OTMyMDMzNzAsImV4cCI6MTc5MzI4OTc3MH0.Voew4KqdFfnEAluiSzEJsQBA2kG0eYe9BX4Pb-8ryXk'
 ---
 
 <script>
