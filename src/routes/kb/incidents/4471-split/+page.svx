@@ -1,0 +1,59 @@
+---
+layout: runbook
+title: '#4471 · three problems, not one'
+owner: Paweł Fraś
+status: draft
+reviewed: 2026-10-28
+signature: Paweł Fraś
+---
+
+<script>
+  import SplitTable from '#lib/kb/SplitTable.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  const repo = 'https://github.com/pawelfras/mega-s01e03-what-it-shows/issues';
+</script>
+
+[#4471](/kb/incidents/4471) was merged on subject lines ([decision 0001](/kb/decisions/0001-dedupe-by-subject))
+and marked known as one bug. Read by tenant and by what the reports say, it holds three problems.
+Each now has its own ticket. The counts below are computed from the export on every build.
+
+<SplitTable ticket={4471} tickets={{ parser: `${repo}/1`, hint: `${repo}/2`, 'one-day': `${repo}/3` }} />
+
+## The three problems
+
+**`parser` — the shared parser reads every date month first.** Day-first tenants get day and month
+swapped: "7 April" goes out as "4 July". This is what #4471's title describes, and its queued fix
+covers only this.
+
+**`hint` — booking-v3 prints `MM/DD/YYYY` under its date field.** At day-first tenants on
+booking-v3, people type what the hint says, month first, and the form reads it day first. It
+looks like the parser bug in the report, but the parser fix will not touch it: the form's hint and
+its reading must agree.
+
+**`one-day` — the date moves by one day, not a month flip.** Tuesday shows as Monday, an invite
+arrives before the booking, two clients in different time zones get different days for the same
+meeting. That is a time-zone or day-boundary bug. The desk noted these reports
+(`desk-notes.json`) but [the #4471 table](/kb/incidents/4471) counts them under `parser`.
+
+<Callout kind="warn">
+Do not count by intake tag. Intake guesses the cause from the reporter's browser; many reports
+come from browsers set to <code>en-US</code> at day-first tenants. The cause follows the tenant's
+locale, its booking form and the channel (<code>causes.ts</code>), and the "intake tag differs"
+column shows how often the guess is wrong.
+</Callout>
+
+## How this was counted
+
+1. Drop repeated rows: the export pages overlap, so one id counts once (`uniqueById`).
+2. Take the desk's one-day list first; those reports are `one-day`.
+3. Place every other report with `causeOf`: day-first tenant, `form` channel, booking-v3 → `hint`; any
+   other day-first report → `parser`.
+
+## What to change on the desk
+
+- Split by cause, not subject. Same subject, different cause: keep apart. The
+  [dedupe explorer](/kb/triage/dedupe) already shows the difference.
+- When a big ticket is marked known, check that its fix covers every report in it.
+
+<RenderStamp {signature} />
